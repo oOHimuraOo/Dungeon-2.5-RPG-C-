@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bo3qufs42it0y"]
+
+[ext_resource type="Script" path="res://Scripts/Personagens/Player/PlayerDeathState.cs" id="1_kwkmu"]
+
+[node name="PlayerDeathState" type="Node"]
+script = ExtResource("1_kwkmu")

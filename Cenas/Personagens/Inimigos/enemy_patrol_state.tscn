@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://c4rooqhj64lid"]
+
+[ext_resource type="Script" path="res://Scripts/Personagens/Inimigo/EnemyPatrolState.cs" id="1_tm3l2"]
+
+[node name="EnemyPatrolState" type="Node" node_paths=PackedStringArray("IdleTimerNode")]
+script = ExtResource("1_tm3l2")
+IdleTimerNode = NodePath("Timer")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true

@@ -1,0 +1,114 @@
+[gd_scene load_steps=18 format=3 uid="uid://vebtgtkkltqe"]
+
+[ext_resource type="Script" path="res://Scripts/Habilidades/Bomb.cs" id="1_nsjah"]
+[ext_resource type="Texture2D" uid="uid://btfhhx3vuc4yw" path="res://Assets/Assets/Sprites/Effects/Explosion/1.png" id="1_y83iv"]
+[ext_resource type="Texture2D" uid="uid://du3vpffou6bm0" path="res://Assets/Assets/Sprites/Effects/Explosion/Bomb.png" id="2_1ddfw"]
+[ext_resource type="Texture2D" uid="uid://cavtyl0r5gs5p" path="res://Assets/Assets/Sprites/Effects/Explosion/2.png" id="3_gp7m3"]
+[ext_resource type="Texture2D" uid="uid://cg8447mn2psve" path="res://Assets/Assets/Sprites/Effects/Explosion/3.png" id="4_6x3n2"]
+[ext_resource type="Texture2D" uid="uid://b4o0vfw1aqyat" path="res://Assets/Assets/Sprites/Effects/Explosion/4.png" id="5_q7jeo"]
+[ext_resource type="Texture2D" uid="uid://6x2e7ay2x1cg" path="res://Assets/Assets/Sprites/Effects/Explosion/5.png" id="6_adb8b"]
+[ext_resource type="Texture2D" uid="uid://bqh1i82wo6mgs" path="res://Assets/Assets/Sprites/Effects/Explosion/6.png" id="7_q3vwx"]
+[ext_resource type="Texture2D" uid="uid://bqydgvj5pvjo6" path="res://Assets/Assets/Sprites/Effects/Explosion/7.png" id="8_e4ke0"]
+[ext_resource type="Texture2D" uid="uid://csknd78w2dtxd" path="res://Assets/Assets/Sprites/Effects/Explosion/8.png" id="9_ehc4m"]
+[ext_resource type="Texture2D" uid="uid://6kxvr57rwajr" path="res://Assets/Assets/Sprites/Effects/Explosion/9.png" id="10_ub5uq"]
+[ext_resource type="Texture2D" uid="uid://5trsubapb7ns" path="res://Assets/Assets/Sprites/Effects/Explosion/10.png" id="11_bxk0d"]
+[ext_resource type="Script" path="res://Scripts/Habilidades/BombHitbox.cs" id="13_6iumf"]
+
+[sub_resource type="Animation" id="Animation_i5yhw"]
+resource_name = "Expand"
+step = 0.0416667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_1ddfw")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite3D:pixel_size")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.01, 0.02]
+}
+
+[sub_resource type="Animation" id="Animation_g1o8p"]
+resource_name = "Explosion"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("1_y83iv"), ExtResource("3_gp7m3"), ExtResource("4_6x3n2"), ExtResource("5_q7jeo"), ExtResource("6_adb8b"), ExtResource("7_q3vwx"), ExtResource("8_e4ke0"), ExtResource("9_ehc4m"), ExtResource("10_ub5uq"), ExtResource("11_bxk0d")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite3D:pixel_size")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.02]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Hitbox/CollisionShape3D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.3),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_amsjj"]
+_data = {
+"Expand": SubResource("Animation_i5yhw"),
+"Explosion": SubResource("Animation_g1o8p")
+}
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_fpipg"]
+radius = 2.0
+
+[node name="Bomb" type="Node3D" node_paths=PackedStringArray("AnimPlayerNode")]
+script = ExtResource("1_nsjah")
+AnimPlayerNode = NodePath("AnimationPlayer")
+Damage = 4.0
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+texture = ExtResource("2_1ddfw")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_amsjj")
+}
+autoplay = "Expand"
+
+[node name="Hitbox" type="Area3D" parent="."]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("13_6iumf")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox"]
+shape = SubResource("SphereShape3D_fpipg")
+disabled = true

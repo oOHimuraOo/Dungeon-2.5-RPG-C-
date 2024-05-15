@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://45v35aunktoy"]
+
+[ext_resource type="Script" path="res://Scripts/Personagens/Player/PlayerAttackState.cs" id="1_muuli"]
+
+[node name="PlayerAttackState" type="Node" node_paths=PackedStringArray("ResetCounter")]
+script = ExtResource("1_muuli")
+ResetCounter = NodePath("Timer")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true

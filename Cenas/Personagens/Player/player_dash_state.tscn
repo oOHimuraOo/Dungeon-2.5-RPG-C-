@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://djegu6tyxtjy"]
+
+[ext_resource type="Script" path="res://Scripts/Personagens/Player/PlayerDashState.cs" id="1_da5hx"]
+
+[node name="PlayerDashState" type="Node" node_paths=PackedStringArray("DashTimerNode", "CooldownTimer")]
+script = ExtResource("1_da5hx")
+DashTimerNode = NodePath("DashDurationTimer")
+CooldownTimer = NodePath("CooldownTimer")
+
+[node name="DashDurationTimer" type="Timer" parent="."]
+wait_time = 0.4
+one_shot = true
+
+[node name="CooldownTimer" type="Timer" parent="."]
+process_mode = 3
+wait_time = 3.0
+one_shot = true

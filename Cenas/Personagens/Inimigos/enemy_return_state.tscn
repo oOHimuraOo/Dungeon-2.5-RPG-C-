@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://4leq2ses15ji"]
+
+[ext_resource type="Script" path="res://Scripts/Personagens/Inimigo/EnemyReturnState.cs" id="1_f88dx"]
+
+[node name="EnemyReturnState" type="Node"]
+script = ExtResource("1_f88dx")

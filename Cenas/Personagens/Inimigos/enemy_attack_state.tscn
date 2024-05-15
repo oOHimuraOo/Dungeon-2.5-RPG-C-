@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://cfo2ffjx66u3o"]
+
+[ext_resource type="Script" path="res://Scripts/Personagens/Inimigo/EnemyAttackState.cs" id="1_04epf"]
+
+[node name="EnemyAttackState" type="Node" node_paths=PackedStringArray("Cooldown")]
+script = ExtResource("1_04epf")
+Cooldown = NodePath("Timer")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.8
+one_shot = true
