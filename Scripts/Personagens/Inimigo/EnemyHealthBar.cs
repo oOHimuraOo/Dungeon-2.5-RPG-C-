@@ -14,7 +14,6 @@ public partial class EnemyHealthBar : HealthBar
     }
     public void HandleEnemyHitted()
     {
-        GD.Print(Enemy);
         Health = Enemy.GetStatResource(Stat.Health).StatValue;
         HealthBarNode.Value = Health;
     }
